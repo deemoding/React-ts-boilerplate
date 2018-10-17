@@ -1,0 +1,103 @@
+{
+  "name": "react-ts-boilerplate",
+  "version": "0.0.1",
+  "main": "src/index.tsx",
+  "scripts": {
+    "precommit": "npm run lint",
+    "commitmsg": "npm run lint:msg",
+    "lint": "tslint -e .tslintignore --fix *.ts*",
+    "lint:msg": "validate-commit-msg",
+    "test": "npm run lint",
+    "start": "webpack-dev-server --progress --host 0.0.0.0",
+    "build": "TS_NODE_PROJECT=\"tsconfig-for-webpack-config.json\" webpack --mode production --config webpack.production.config.ts",
+    "validate": "npm ls",
+    "cz": "git-cz",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0",
+    "antd": "~3.9.2",
+    "csstype": "^2.5.7",
+    "immutable": "^3.7.4",
+    "react": "^16.5.2",
+    "react-dom": "~16.5.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@nice-labs/ts-import-plugin": "^2.0.1",
+    "@types/html-minifier": "^3.5.2",
+    "@types/minimatch": "^3.0.3",
+    "@types/node": "^10.11.0",
+    "@types/react": "^16.4.14",
+    "@types/react-dom": "^16.0.7",
+    "@types/socket.io-client": "^1.4.32",
+    "@types/webpack": "^4.4.12",
+    "@types/webpack-bundle-analyzer": "^2.13.0",
+    "babel-loader": "^8.0.2",
+    "clean-webpack-plugin": "^0.1.19",
+    "commitizen": "^2.9.3",
+    "conventional-changelog-cli": "~2.0.1",
+    "copy-webpack-plugin": "~4.5.1",
+    "css-loader": "~1.0.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "husky": "^1.1.2",
+    "less": "^3.0.4",
+    "less-loader": "^4.1.0",
+    "no-console-webpack-plugin": "0.0.5",
+    "node-sass": "^4.9.0",
+    "open-browser-webpack-plugin": "0.0.5",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^7.0.1",
+    "style-loader": "~0.23.0",
+    "ts-loader": "^5.2.0",
+    "ts-node": "^7.0.1",
+    "tsconfig-paths": "^3.6.0",
+    "tslint": "^5.11.0",
+    "tslint-react": "^3.6.0",
+    "typed-css-modules": "^0.3.6",
+    "typescript": "^3.0.3",
+    "uglifyjs-webpack-plugin": "^2.0.1",
+    "url-loader": "^1.0.1",
+    "validate-commit-msg": "~2.14.0",
+    "webpack": "^4.19.1",
+    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-cli": "~3.1.0",
+    "webpack-dev-server": "^3.1.3",
+    "webpack-parallel-uglify-plugin": "^1.1.0"
+  },
+  "keywords": [
+    "es6",
+    "web app",
+    "typescript"
+  ],
+  "author": "DeemoDing",
+  "license": "MIT",
+  "config": {
+    "validate-commit-msg": {
+      "types": [
+        "feat",
+        "fix",
+        "docs",
+        "style",
+        "refactor",
+        "perf",
+        "test",
+        "chore",
+        "revert",
+        "build"
+      ],
+      "warnOnFail": false,
+      "maxSubjectLength": 100
+    },
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}

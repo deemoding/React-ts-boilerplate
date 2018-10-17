@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <title>React Ts Boilerplate</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script><% } %>
+  </body>
+</html>
