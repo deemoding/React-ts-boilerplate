@@ -1,19 +1,27 @@
 import tsImportPluginFactory from "@nice-labs/ts-import-plugin";
-import CleanWebpackPlugin from "clean-webpack-plugin";
-import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import * as path from "path";
-import UglifyJsPlugin from "uglifyjs-webpack-plugin";
 import * as webpack from "webpack";
-import {BundleAnalyzerPlugin} from "webpack-bundle-analyzer";
+import OpenBrowserPlugin from "open-browser-webpack-plugin";
+
+const port = 65534;
 
 const config: webpack.Configuration = {
-  entry: {
-    app: path.resolve(__dirname, "src/index.tsx"),
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
+    inline: true,
+    contentBase: "./public",
+    port,
   },
+  mode: "development",
+  devtool: "eval",
+  entry: [
+    path.resolve(__dirname, "src/index.tsx"),
+  ],
   output: {
-    filename: "[name].bundle.[chunkhash:8].js",
     path: path.resolve(__dirname, "build"),
+    filename: "[name].bundle.js",
   },
   module: {
     rules: [
@@ -90,53 +98,14 @@ const config: webpack.Configuration = {
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
   },
-  optimization: {
-    splitChunks: {
-      chunks: "all",
-    },
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: false,
-        sourceMap: false,
-        parallel: true,
-        uglifyOptions: {
-          safari10: true,
-          compress: true,
-        },
-      }),
-    ],
-  },
   plugins: [
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: JSON.stringify("production"),
-      },
-    }),
-    new CleanWebpackPlugin(path.resolve(__dirname, "build")),
-    /*
-    new ParallelUglifyPlugin({
-      uglifyJS: {
-        output: {
-          beautify: false, // 不需要格式化
-          comments: true, // 不保留注释
-        },
-        compress: {
-          drop_console: true, // 删除所有的 `console` 语句，可以兼容ie浏览器
-          collapse_vars: true, // 内嵌定义了但是只用到一次的变量
-          reduce_vars: true, // 提取出出现多次但是没有定义成变量去引用的静态值
-        },
-      },
-    }),
-    */
-    new CopyWebpackPlugin([
-      {from: "./public/*.js", to: "[name].js"},
-    ]),
+    new webpack.HotModuleReplacementPlugin(),
+    new OpenBrowserPlugin({url: `http://localhost:${port}`}),
     new HtmlWebpackPlugin({
       hash: false,
       inject: false,
       template: "public/index.html",
     }),
-    new BundleAnalyzerPlugin(),
   ],
 };
 
