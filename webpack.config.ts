@@ -1,8 +1,7 @@
-import tsImportPluginFactory from "@nice-labs/ts-import-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import OpenBrowserPlugin from "open-browser-webpack-plugin";
 import * as path from "path";
 import * as webpack from "webpack";
-import OpenBrowserPlugin from "open-browser-webpack-plugin";
 
 const port = 65534;
 
@@ -30,20 +29,6 @@ const config: webpack.Configuration = {
         loader: "ts-loader",
         options: {
           transpileOnly: true,
-          getCustomTransformers: () => ({
-            before: [
-              tsImportPluginFactory(
-                // predefined-names or ILibrary objects
-                {
-                  // ILibrary object
-                  libraryName: "antd",
-                  libraryPath: "lib",
-                  moduleName: "kebabCase",
-                  appendPaths: (paths) => `${paths}/style/index.less`,
-                },
-              ),
-            ],
-          }),
         },
       }, {
         enforce: "pre",
