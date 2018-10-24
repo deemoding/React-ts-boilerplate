@@ -37,7 +37,7 @@ const config: webpack.Configuration = {
                 {
                   // ILibrary object
                   libraryName: "antd",
-                  libraryPath: "lib",
+                  libraryPath: "es",
                   moduleName: "kebabCase",
                   appendPaths: (paths) => `${paths}/style/index.less`,
                 },
