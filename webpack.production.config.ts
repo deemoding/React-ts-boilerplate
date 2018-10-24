@@ -29,7 +29,7 @@ const config: webpack.Configuration = {
                 {
                   // ILibrary object
                   libraryName: "antd",
-                  libraryPath: "lib",
+                  libraryPath: "es",
                   moduleName: "kebabCase",
                   appendPaths: (paths) => `${paths}/style/index.less`,
                 },
@@ -89,6 +89,9 @@ const config: webpack.Configuration = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
+    alias: {
+      "@ant-design/icons/lib/dist$": path.resolve(__dirname, "src/icon.ts"),
+    },
   },
   optimization: {
     splitChunks: {

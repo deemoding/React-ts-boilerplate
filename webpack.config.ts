@@ -1,8 +1,8 @@
 import tsImportPluginFactory from "@nice-labs/ts-import-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import OpenBrowserPlugin from "open-browser-webpack-plugin";
 import * as path from "path";
 import * as webpack from "webpack";
-import OpenBrowserPlugin from "open-browser-webpack-plugin";
 
 const port = 65534;
 
@@ -97,6 +97,9 @@ const config: webpack.Configuration = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
+    alias: {
+      "@ant-design/icons/lib/dist$": path.resolve(__dirname, "src/icon.ts"),
+    },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

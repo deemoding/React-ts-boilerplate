@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
-    "antd": "~3.9.2",
+    "antd": "~3.10.2",
     "csstype": "^2.5.7",
     "immutable": "^3.7.4",
     "react": "^16.5.2",
