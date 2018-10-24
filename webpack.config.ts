@@ -1,3 +1,4 @@
+import tsImportPluginFactory from "@nice-labs/ts-import-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import OpenBrowserPlugin from "open-browser-webpack-plugin";
 import * as path from "path";
@@ -29,6 +30,20 @@ const config: webpack.Configuration = {
         loader: "ts-loader",
         options: {
           transpileOnly: true,
+          getCustomTransformers: () => ({
+            before: [
+              tsImportPluginFactory(
+                // predefined-names or ILibrary objects
+                {
+                  // ILibrary object
+                  libraryName: "antd",
+                  libraryPath: "lib",
+                  moduleName: "kebabCase",
+                  appendPaths: (paths) => `${paths}/style/index.less`,
+                },
+              ),
+            ],
+          }),
         },
       }, {
         enforce: "pre",
@@ -82,6 +97,9 @@ const config: webpack.Configuration = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
+    alias: {
+      "@ant-design/icons/lib/dist$": path.resolve(__dirname, "src/icon.ts"),
+    },
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
