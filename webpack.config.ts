@@ -1,6 +1,5 @@
 import tsImportPluginFactory from "@nice-labs/ts-import-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import OpenBrowserPlugin from "open-browser-webpack-plugin";
 import * as path from "path";
 import * as webpack from "webpack";
 
@@ -39,7 +38,7 @@ const config: webpack.Configuration = {
                   libraryName: "antd",
                   libraryPath: "es",
                   moduleName: "kebabCase",
-                  appendPaths: (paths) => `${paths}/style/index.less`,
+                  appendPaths: (paths) => `${paths.replace(/(.*)(row|col)/, "$1grid")}/style/index.less`,
                 },
               ),
             ],
@@ -58,13 +57,16 @@ const config: webpack.Configuration = {
             loader: "css-loader",
             options: {
               modules: true,
+              importLoaders: 2,
             },
           },
           "less-loader",
+          "postcss-loader",
         ],
       }, {
         test: /\.less$/,
         include: /node_modules/,
+        exclude: /src/,
         use: [
           "style-loader",
           "css-loader",
@@ -103,7 +105,6 @@ const config: webpack.Configuration = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserPlugin({url: `http://localhost:${port}`}),
     new HtmlWebpackPlugin({
       hash: false,
       inject: false,

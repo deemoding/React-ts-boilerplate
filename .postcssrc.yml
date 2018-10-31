@@ -1,0 +1,8 @@
+plugins:
+  postcss-preset-env:
+    browsers:
+      - 'ie > 8'
+      - 'firefox > 50'
+      - 'chrome > 60'
+    autoprefixer:
+      grid: true

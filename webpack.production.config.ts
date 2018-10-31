@@ -31,7 +31,7 @@ const config: webpack.Configuration = {
                   libraryName: "antd",
                   libraryPath: "es",
                   moduleName: "kebabCase",
-                  appendPaths: (paths) => `${paths}/style/index.less`,
+                  appendPaths: (paths) => `${paths.replace(/(.*)(row|col)/, "$1grid")}/style/index.less`,
                 },
               ),
             ],
@@ -50,9 +50,11 @@ const config: webpack.Configuration = {
             loader: "css-loader",
             options: {
               modules: true,
+              importLoaders: 2,
             },
           },
           "less-loader",
+          "postcss-loader",
         ],
       }, {
         test: /\.less$/,
