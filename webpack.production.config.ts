@@ -92,7 +92,7 @@ const config: webpack.Configuration = {
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
     alias: {
-      "@ant-design/icons/lib/dist$": path.resolve(__dirname, "src/icon.ts"),
+      "@ant-design/icons/lib/dist$": path.resolve(__dirname, "src/antd/icon.ts"),
     },
   },
   optimization: {
