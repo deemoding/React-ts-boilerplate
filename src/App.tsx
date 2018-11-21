@@ -8,8 +8,10 @@ class App extends React.PureComponent {
       <div className={style.main}>
         <Alert
           message={
-            <div className={style.text}>
-              This boilerplate is so cool!
+            <div className={`${style.link} ${style.text}`}>
+              <a href={`#${Math.random()}`} target="_blank">
+                I'll change my color when you click me, and reset when you refresh.
+              </a>
             </div>
           }
           type="success"
