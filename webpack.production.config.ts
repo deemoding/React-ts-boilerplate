@@ -3,9 +3,12 @@ import CleanWebpackPlugin from "clean-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import * as path from "path";
-import UglifyJsPlugin from "uglifyjs-webpack-plugin";
 import * as webpack from "webpack";
 import {BundleAnalyzerPlugin} from "webpack-bundle-analyzer";
+
+/* tslint:disable:no-var-requires */
+const WebpackObfuscator = require("webpack-obfuscator");
+/* tslint:enable:no-var-requires */
 
 const config: webpack.Configuration = {
   entry: {
@@ -99,23 +102,6 @@ const config: webpack.Configuration = {
     splitChunks: {
       chunks: "all",
     },
-    minimizer: [
-      new UglifyJsPlugin({
-        cache: false,
-        parallel: true,
-        uglifyOptions: {
-          output: {
-            beautify: false, // 不需要格式化
-            comments: false, // 不保留注释
-          },
-          compress: {
-            drop_console: true, // 删除所有的 `console` 语句，可以兼容ie浏览器
-            collapse_vars: true, // 内嵌定义了但是只用到一次的变量
-            reduce_vars: true, // 提取出出现多次但是没有定义成变量去引用的静态值
-          },
-        },
-      }),
-    ],
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -124,6 +110,12 @@ const config: webpack.Configuration = {
       },
     }),
     new CleanWebpackPlugin(path.resolve(__dirname, "build")),
+    new WebpackObfuscator({
+      disableConsoleOutput: true,
+      domainLock: [],
+      // seed: 2147483647,
+      seed: 23333,
+    }, ""),
     new CopyWebpackPlugin([
       {from: "./public/*.js", to: "[name].js"},
     ]),
