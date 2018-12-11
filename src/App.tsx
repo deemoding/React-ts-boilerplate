@@ -1,5 +1,5 @@
-import * as React from "react";
 import {Alert} from "antd";
+import * as React from "react";
 import * as style from "./App.less";
 
 class App extends React.PureComponent {
@@ -12,16 +12,14 @@ class App extends React.PureComponent {
               <a href={`#${Math.random()}`} target="_blank">
                 I'll change my color when you click me, and reset when you refresh.
               </a>
-            </div>
-          }
+            </div>}
           type="success"
         />
         <Alert
           message={
             <div className={style.text}>
               This boilerplate is so cool!
-            </div>
-          }
+            </div>}
           type="success"
         />
       </div>
