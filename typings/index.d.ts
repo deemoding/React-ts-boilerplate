@@ -2,4 +2,3 @@
 /// <reference path="modules/htmlWebpack.d.ts" />
 /// <reference path="modules/cleanWebpack.d.ts" />
 /// <reference path="modules/uglifyjsWebpack.d.ts" />
-/// <reference path="modules/openBrowserWebpack.d.ts" />
