@@ -34,7 +34,7 @@ const config: webpack.Configuration = {
                   libraryName: "antd",
                   libraryPath: "es",
                   moduleName: "kebabCase",
-                  appendPaths: (paths) => `${paths.replace(/(.*)(row|col)/, "$1grid")}/style/index.less`,
+                  appendPaths: (paths) => `${paths.replace(/(.*)(row|col)$/, "$1grid")}/style/index.less`,
                 },
               ),
             ],
