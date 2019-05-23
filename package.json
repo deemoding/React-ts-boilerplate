@@ -63,7 +63,7 @@
     "url-loader": "^1.1.2",
     "validate-commit-msg": "^2.14.0",
     "webpack": "^4.28.4",
-    "webpack-bundle-analyzer": "^3.0.3",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",
     "webpack-parallel-uglify-plugin": "^1.1.0"
