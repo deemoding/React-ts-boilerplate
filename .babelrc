@@ -6,13 +6,13 @@
         "firefox": 60
       },
       "spec": true,
-      "debug": false
+      "debug": false,
+      "modules": "cjs"
     }],
     "@babel/preset-react",
     "@babel/preset-typescript"
   ],
   "plugins": [
-    ["@babel/plugin-proposal-class-properties"],
-    ["@babel/plugin-transform-runtime"]
+    ["@babel/plugin-proposal-class-properties"]
   ]
 }
