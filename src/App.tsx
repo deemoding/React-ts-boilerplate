@@ -1,8 +1,12 @@
-import {Alert} from "antd";
+import {Alert, message} from "antd";
 import * as React from "react";
 import * as style from "./App.less";
 
 class App extends React.PureComponent {
+  public componentDidMount(): void {
+    message.success("ok", 3);
+  }
+
   public render() {
     return (
       <div className={style.main}>
