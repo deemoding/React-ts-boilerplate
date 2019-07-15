@@ -46,3 +46,4 @@ build
 # custom
 *.js
 *.jsx
+*.bak

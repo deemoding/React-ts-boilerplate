@@ -1,5 +1,5 @@
 import tsImportPluginFactory from "@nice-labs/ts-import-plugin";
-import CleanWebpackPlugin from "clean-webpack-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import CopyWebpackPlugin from "copy-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import * as path from "path";
@@ -31,7 +31,7 @@ const config: webpack.Configuration = {
                   libraryName: "antd",
                   libraryPath: "es",
                   moduleName: "kebabCase",
-                  appendPaths: (paths) => `${paths.replace(/(.*)(row|col)$/, "$1grid")}/style/index.less`,
+                  appendPaths: (paths: string) => `${paths.replace(/(.*)(row|col)$/, "$1grid")}/style/index.less`,
                 },
               ),
             ],
@@ -123,7 +123,9 @@ const config: webpack.Configuration = {
         NODE_ENV: JSON.stringify("production"),
       },
     }),
-    new CleanWebpackPlugin(path.resolve(__dirname, "build")),
+    new CleanWebpackPlugin({
+      verbose: true,
+    }),
     new CopyWebpackPlugin([
       {from: "./public/*.js", to: "[name].js"},
     ]),

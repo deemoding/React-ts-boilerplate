@@ -38,7 +38,7 @@ const config: webpack.Configuration = {
                   libraryName: "antd",
                   libraryPath: "es",
                   moduleName: "kebabCase",
-                  appendPaths: (paths) => `${paths.replace(/(.*)(row|col)$/, "$1grid")}/style/index.less`,
+                  appendPaths: (paths: string) => `${paths.replace(/(.*)(row|col)$/, "$1grid")}/style/index.less`,
                 },
               ),
             ],
@@ -56,8 +56,11 @@ const config: webpack.Configuration = {
           {
             loader: "css-loader",
             options: {
-              modules: true,
+              modules: {
+                localIdentName: "[local]-[contenthash:base64:8]",
+              },
               importLoaders: 2,
+              localsConvention: "camelCase",
             },
           },
           "less-loader",
