@@ -5,10 +5,8 @@
 
 /// <reference types='node' />
 
-import { ChildProcess } from "child_process";
-
-type Callback = (error: Error, stdout: string, stderr: string) => void;
-declare function opener(
-  args: string | string[], options?: {}, callback?: Callback): ChildProcess;
-
-export default opener;
+declare module "opener" {
+  import { ChildProcess } from "child_process";
+  type Callback = (error: Error, stdout: string, stderr: string) => void;
+  export default function(args: string | string[], options?: {}, callback?: Callback): ChildProcess;
+}
