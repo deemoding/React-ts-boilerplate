@@ -1,5 +1,6 @@
 import tsImportPluginFactory from "@nice-labs/ts-import-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
+import opener from "opener";
 import * as path from "path";
 import * as webpack from "webpack";
 
@@ -113,6 +114,24 @@ const config: webpack.Configuration = {
       inject: false,
       template: "public/index.html",
     }),
+    (() => {
+      class Opener {
+        private done: boolean;
+        constructor() {
+          this.done = false;
+        }
+
+        public apply(compiler: webpack.Compiler) {
+          compiler.hooks.done.tap("Opener", (stats) => {
+            if (!(this.done || stats.hasErrors())) {
+              opener(`http://localhost:${port}`);
+              this.done = true;
+            }
+          });
+        }
+      }
+      return new Opener();
+    })(),
   ],
 };
 
