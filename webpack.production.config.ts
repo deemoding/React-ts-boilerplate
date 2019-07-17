@@ -8,6 +8,7 @@ import * as webpack from "webpack";
 import {BundleAnalyzerPlugin} from "webpack-bundle-analyzer";
 
 const config: webpack.Configuration = {
+  mode: "production",
   entry: {
     app: path.resolve(__dirname, "src/index.tsx"),
   },
