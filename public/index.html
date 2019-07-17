@@ -2,7 +2,10 @@
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
+    <meta name="renderer" content="webkit" />
     <title>React Ts Boilerplate</title>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.files.css[css] %>"><% } %>
   </head>
   <body>
     <div id="root"></div>

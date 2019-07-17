@@ -2,11 +2,12 @@
   "compilerOptions": {
     "module": "esnext",
     "target": "es5",
+    "outDir": "./build/",
     "sourceMap": false,
     "noImplicitAny": true,
     "jsx": "react",
     "moduleResolution": "node",
-    "outDir": "./build/"
+    "alwaysStrict": true
   },
   "exclude": [
     "node_modules"
