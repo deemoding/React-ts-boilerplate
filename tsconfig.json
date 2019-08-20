@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "es5",
+    "target": "esnext",
     "sourceMap": false,
     "noImplicitAny": true,
     "jsx": "react",
