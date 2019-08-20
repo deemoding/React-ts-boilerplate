@@ -27,24 +27,29 @@ const config: webpack.Configuration = {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: "ts-loader",
-        options: {
-          transpileOnly: true,
-          getCustomTransformers: () => ({
-            before: [
-              tsImportPluginFactory(
-                // predefined-names or ILibrary objects
-                {
-                  // ILibrary object
-                  libraryName: "antd",
-                  libraryPath: "es",
-                  moduleName: "kebabCase",
-                  appendPaths: (paths: string) => `${paths.replace(/(.*)(row|col)$/, "$1grid")}/style/index.less`,
-                },
-              ),
-            ],
-          }),
-        },
+        use: [
+          "babel-loader",
+          {
+            loader: "ts-loader",
+            options: {
+              transpileOnly: true,
+              getCustomTransformers: () => ({
+                before: [
+                  tsImportPluginFactory(
+                    // predefined-names or ILibrary objects
+                    {
+                      // ILibrary object
+                      libraryName: "antd",
+                      libraryPath: "es",
+                      moduleName: "kebabCase",
+                      appendPaths: (paths) => `${paths.replace(/(.*)(row|col)$/, "$1grid")}/style/index.less`,
+                    },
+                  ),
+                ],
+              }),
+            },
+          },
+        ],
       }, {
         enforce: "pre",
         test: /\.jsx?$/,

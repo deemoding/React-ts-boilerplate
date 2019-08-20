@@ -25,8 +25,6 @@
     "@babel/plugin-proposal-class-properties": "^7.5.0",
     "@babel/plugin-transform-runtime": "^7.5.0",
     "@babel/preset-env": "^7.5.4",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.3.3",
     "@nice-labs/ts-import-plugin": "^2.1.1",
     "@types/html-minifier": "^3.5.3",
     "@types/minimatch": "^3.0.3",
