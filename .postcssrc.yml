@@ -1,7 +1,7 @@
 plugins:
   postcss-preset-env:
     browsers:
-      - 'ie > 8'
+      - 'ie 11'
       - 'firefox > 50'
       - 'chrome > 60'
     autoprefixer:

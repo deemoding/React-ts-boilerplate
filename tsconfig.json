@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
     "module": "esnext",
-    "target": "esnext",
-    "outDir": "./build/",
+    "target": "es5",
     "sourceMap": false,
     "noImplicitAny": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "moduleResolution": "node",
-    "alwaysStrict": true
+    "outDir": "./build/",
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules"

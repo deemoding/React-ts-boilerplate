@@ -4,12 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="renderer" content="webkit" />
     <title>React Ts Boilerplate</title>
-    <% for (var css in htmlWebpackPlugin.files.css) { %>
-    <link rel="stylesheet" type="text/css" href="<%= htmlWebpackPlugin.files.css[css] %>"><% } %>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <%= htmlWebpackPlugin.tags.headTags %>
   </head>
   <body>
     <div id="root"></div>
-    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-    <script type="text/javascript" src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script><% } %>
+    <%= htmlWebpackPlugin.tags.bodyTags %>
   </body>
 </html>

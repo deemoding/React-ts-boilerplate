@@ -1,8 +1,8 @@
-import tsImportPluginFactory from "@nice-labs/ts-import-plugin";
+// import tsImportPluginFactory from "@nice-labs/ts-import-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
-import opener from "opener";
 import * as path from "path";
 import * as webpack from "webpack";
+import "webpack-dev-server";
 
 const port = 65534;
 
@@ -13,6 +13,7 @@ const config: webpack.Configuration = {
     inline: true,
     contentBase: "./public",
     port,
+    open: true,
   },
   mode: "development",
   devtool: "eval",
@@ -27,29 +28,24 @@ const config: webpack.Configuration = {
     rules: [
       {
         test: /\.tsx?$/,
-        use: [
-          "babel-loader",
-          {
-            loader: "ts-loader",
-            options: {
-              transpileOnly: true,
-              getCustomTransformers: () => ({
-                before: [
-                  tsImportPluginFactory(
-                    // predefined-names or ILibrary objects
-                    {
-                      // ILibrary object
-                      libraryName: "antd",
-                      libraryPath: "es",
-                      moduleName: "kebabCase",
-                      appendPaths: (paths) => `${paths.replace(/(.*)(row|col)$/, "$1grid")}/style/index.less`,
-                    },
-                  ),
-                ],
-              }),
-            },
-          },
-        ],
+        loader: "ts-loader",
+        options: {
+          transpileOnly: true,
+          // getCustomTransformers: () => ({
+          //   before: [
+          //     tsImportPluginFactory(
+          //       // predefined-names or ILibrary objects
+          //       {
+          //         // ILibrary object
+          //         libraryName: "antd",
+          //         libraryPath: "es",
+          //         moduleName: "kebabCase",
+          //         appendPaths: (paths) => `${paths.replace(/(.*)(row|col)/, "$1grid")}/style/index`,
+          //       },
+          //     ),
+          //   ],
+          // }),
+        },
       }, {
         enforce: "pre",
         test: /\.jsx?$/,
@@ -63,14 +59,25 @@ const config: webpack.Configuration = {
             loader: "css-loader",
             options: {
               modules: {
-                localIdentName: "[local]-[contenthash:base64:8]",
+                localIdentName: "[local]-[contenthash:8]",
+                exportLocalsConvention: "camelCaseOnly",
               },
               importLoaders: 2,
-              localsConvention: "camelCase",
+              esModule: true,
+              sourceMap: true,
+              // context: path.resolve(__dirname, "../"),
             },
           },
-          "less-loader",
           "postcss-loader",
+          {
+            loader: "less-loader",
+            options: {
+              sourceMap: true,
+              lessOptions: {
+                javascriptEnabled: true,
+              },
+            },
+          },
         ],
       }, {
         test: /\.less$/,
@@ -82,7 +89,9 @@ const config: webpack.Configuration = {
           {
             loader: "less-loader",
             options: {
-              javascriptEnabled: true,
+              lessOptions: {
+                javascriptEnabled: true,
+              },
             },
           },
         ],
@@ -108,35 +117,24 @@ const config: webpack.Configuration = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
-    alias: {
-      "@ant-design/icons/lib/dist$": path.resolve(__dirname, "src/antd/icon.ts"),
-    },
+    // alias: {
+    //   "@ant-design/icons/lib/dist$": path.resolve(__dirname, "src/antd/icon.ts"),
+    // },
+  },
+  cache: {
+    type: "memory",
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /^\.\/locale$/,
+      contextRegExp: /moment$/,
+    }),
     new HtmlWebpackPlugin({
       hash: false,
       inject: false,
+      // scriptLoading: 'blocking',
       template: "public/index.html",
     }),
-    (() => {
-      class Opener {
-        private done: boolean;
-        constructor() {
-          this.done = false;
-        }
-
-        public apply(compiler: webpack.Compiler) {
-          compiler.hooks.done.tap("Opener", (stats) => {
-            if (!(this.done || stats.hasErrors())) {
-              opener(`http://localhost:${port}`);
-              this.done = true;
-            }
-          });
-        }
-      }
-      return new Opener();
-    })(),
   ],
 };
 
