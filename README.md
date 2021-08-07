@@ -14,7 +14,7 @@ React自用脚手架（其实稍微改一下，用在别的mvvm框架上面也�
 1. css module + less + autoprefixer
 1. url loader
 1. git commit采用[AngularJS's commit message convention](https://github.com/angular/angular.js/blob/master/DEVELOPERS.md#-git-commit-guidelines)
-1. 自定义githook（预先写了两个[hook](.huskyrc)），并且强制在提交之前运行`ts-lint`语法检查和commit规范检查
+1. 自定义githook（预先写了两个hook），并且强制在提交之前运行`ts-lint`语法检查和commit规范检查
 
 ## 使用方法
 

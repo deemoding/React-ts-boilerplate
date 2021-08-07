@@ -1,3 +1,7 @@
-export const main: string;
-export const text: string;
-export const link: string;
+declare const styles: {
+  readonly "main": string;
+  readonly "text": string;
+  readonly "link": string;
+};
+export = styles;
+
