@@ -1,5 +1,6 @@
 import {useEffect} from "react";
 import {Alert, message} from "antd";
+import {greet} from "wasm";
 import 'antd/es/alert/style/index.less';
 import 'antd/es/message/style/index.less';
 import style from "./App.less";
@@ -7,6 +8,7 @@ import style from "./App.less";
 function App() {
   useEffect(() => {
     setTimeout(() => {
+      greet("比我还帅的地球人");
       message.success('haha!')
     }, 500)
   }, [])

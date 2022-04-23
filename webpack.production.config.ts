@@ -15,6 +15,9 @@ const config: webpack.Configuration = {
     filename: "[name].bundle.[chunkhash:8].js",
     path: path.resolve(__dirname, "build"),
   },
+  experiments: {
+    asyncWebAssembly: true,
+  },
   module: {
     rules: [
       {

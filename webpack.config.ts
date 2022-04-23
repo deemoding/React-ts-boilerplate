@@ -27,6 +27,9 @@ const config: webpack.Configuration = {
     path: path.resolve(__dirname, "build"),
     filename: "[name].bundle.js",
   },
+  experiments: {
+    asyncWebAssembly: true,
+  },
   module: {
     rules: [
       {
