@@ -10,6 +10,7 @@ function App() {
       message.success('haha!')
     }, 500)
   }, [])
+
   return (
     <div className={style.main}>
       <Alert

@@ -10,8 +10,11 @@ const config: webpack.Configuration = {
   devServer: {
     historyApiFallback: true,
     hot: true,
-    inline: true,
-    contentBase: "./public",
+    compress: true,
+    static: {
+      publicPath: "./public",
+      watch: true,
+    },
     port,
     open: true,
   },
